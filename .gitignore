@@ -116,3 +116,5 @@ drizzle/
 
 # Streamlit
 .streamlit/
+# Large dataset files
+notebook/dataset_train.csv
