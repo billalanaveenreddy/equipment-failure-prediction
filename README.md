@@ -45,6 +45,12 @@ pip install -r requirements.txt
 
 If you need to download missing artifacts, set the appropriate environment variables and run `download_models.sh`.
 
+## Dataset
+
+The raw dataset is available here:
+
+- https://drive.google.com/drive/folders/1X0SV3a6HGJURMjDYfPOfJWzK39mpLlMu?usp=sharing
+
 ## Running the project
 
 ### Start the API
