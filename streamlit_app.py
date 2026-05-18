@@ -349,7 +349,6 @@ def gauge(value, title, height=260):
 # PAGE: PREDICT
 # ═══════════════════════════════════════════════════════════════════════════════
 if page == "Predict":
-    # Page header
     st.markdown('<h1 style="font-size:34px;margin-bottom:2px;">Failure Prediction</h1>', unsafe_allow_html=True)
     st.markdown('<p style="color:#475569;font-size:12px;letter-spacing:1px;margin-bottom:28px;">ADJUST SENSOR READINGS — REAL-TIME RISK SCORING</p>', unsafe_allow_html=True)
 
@@ -423,14 +422,12 @@ if page == "Predict":
     with right:
         st.markdown('<div class="section-label">Live Risk Monitor</div>', unsafe_allow_html=True)
 
-        # Always show live gauge (updates on every slider move)
         rf_p, rf_pred, xgb_p, xgb_pred, ens_p, ens_pred = infer(vals)
         label_text, label_cls = risk_label(ens_p)
 
         st.markdown(f'<div style="text-align:center;margin-bottom:12px"><span class="risk-pill {label_cls}">{label_text}</span></div>', unsafe_allow_html=True)
         st.plotly_chart(gauge(round(ens_p * 100, 1), "ENSEMBLE RISK"), use_container_width=True)
 
-        # Mini gauges row
         g1, g2 = st.columns(2)
         with g1:
             st.plotly_chart(gauge(round(rf_p * 100, 1), "RANDOM FOREST", height=190), use_container_width=True)
@@ -438,7 +435,6 @@ if page == "Predict":
             xgb_val = round(xgb_p * 100, 1) if xgb_p is not None else round(rf_p * 100, 1)
             st.plotly_chart(gauge(xgb_val, "XGBOOST" if xgb_model else "XGBOOST (offline)", height=190), use_container_width=True)
 
-        # Threshold progress bars
         st.markdown('<div class="section-label" style="margin-top:8px;">Model Thresholds</div>', unsafe_allow_html=True)
 
         def threshold_bar(label, prob, threshold, color):
@@ -463,7 +459,6 @@ if page == "Predict":
         if xgb_p is not None:
             threshold_bar("XGBoost", xgb_p, xgb_threshold, "#f59e0b")
 
-    # ── Result detail (only after Run) ──
     if run:
         st.markdown("---")
         st.markdown('<div class="section-label">Prediction Detail</div>', unsafe_allow_html=True)
@@ -516,7 +511,7 @@ elif page == "Model Performance":
         df = pd.DataFrame(MODELS)
         for col in ["accuracy","f1","precision","recall","roc_auc"]:
             df[col] = df[col].apply(lambda v: f"{v*100:.2f}%")
-        df.columns = ["Model","Color","Accuracy","F1","Precision","Recall","ROC AUC"]
+        df = df.rename(columns={"name":"Model","accuracy":"Accuracy","precision":"Precision","recall":"Recall","f1":"F1","roc_auc":"ROC AUC"})
         st.dataframe(df[["Model","Accuracy","F1","Precision","Recall","ROC AUC"]], use_container_width=True, hide_index=True)
         st.caption("RF and XGB run live inference. LSTM and Transformer are offline evaluation benchmarks only.")
 
@@ -614,7 +609,6 @@ elif page == "Feature Importance":
     else:
         st.plotly_chart(h_bar(rf_top, "Random Forest — Mean Decrease Impurity", "#3b82f6"), use_container_width=True)
 
-    # Rankings table
     st.markdown('<div class="section-label" style="margin-top:8px;">Full Rankings</div>', unsafe_allow_html=True)
     rf_df = pd.DataFrame(rf_top, columns=["Feature", "RF Importance"])
     rf_df["Rank"] = range(1, len(rf_df) + 1)
