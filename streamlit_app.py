@@ -289,7 +289,7 @@ with st.sidebar:
     <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#475569;line-height:2">
         {rf_dot}<span style="color:#64748b">Random Forest</span> &nbsp;online<br>
         {xgb_dot}<span style="color:#64748b">XGBoost</span> &nbsp;{'online' if xgb_model else '<span style="color:#f59e0b">offline — brew install libomp</span>'}<br>
-        <span style="color:#334155">Features &nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#3b82f6">30</span>
+        <span style="color:#334155">Features &nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#3b82f6">{len(features)}</span>
     </div>
     """, unsafe_allow_html=True)
 
@@ -496,18 +496,18 @@ elif page == "Model Performance":
     st.markdown('<p style="color:#475569;font-size:12px;letter-spacing:1px;margin-bottom:28px;">TEST SET EVALUATION — METROPT-3 DATASET</p>', unsafe_allow_html=True)
 
     MODELS = [
-        {"name": "Random Forest", "accuracy": 0.9371, "precision": 0.7521, "recall": 0.9074, "f1": 0.8224, "roc_auc": 0.9771, "color": "#3b82f6"},
-        {"name": "XGBoost",       "accuracy": 0.9579, "precision": 0.8929, "recall": 0.8384, "f1": 0.8648, "roc_auc": 0.9711, "color": "#f59e0b"},
-        {"name": "LSTM",          "accuracy": 0.8291, "precision": 0.4834, "recall": 0.6286, "f1": 0.5465, "roc_auc": 0.8448, "color": "#10b981"},
-        {"name": "Transformer",   "accuracy": 0.7978, "precision": 0.4221, "recall": 0.6343, "f1": 0.5068, "roc_auc": 0.8081, "color": "#8b5cf6"},
+        {"name": "Random Forest", "accuracy": 0.9498, "precision": 0.9639, "recall": 0.7442, "f1": 0.8399, "roc_auc": 0.9782, "color": "#3b82f6"},
+        {"name": "XGBoost",       "accuracy": 0.9497, "precision": 0.9468, "recall": 0.7585, "f1": 0.8423, "roc_auc": 0.9809, "color": "#f59e0b"},
+        {"name": "LSTM",          "accuracy": 0.9460, "precision": 0.9025, "recall": 0.7789, "f1": 0.8361, "roc_auc": 0.9762, "color": "#10b981"},
+        {"name": "Transformer",   "accuracy": 0.9486, "precision": 0.8776, "recall": 0.8249, "f1": 0.8504, "roc_auc": 0.9804, "color": "#8b5cf6"},
     ]
 
     # KPI strip
     k1, k2, k3, k4 = st.columns(4, gap="medium")
-    with k1: st.metric("Best F1",       f"{max(m['f1'] for m in MODELS)*100:.2f}%",       delta="XGBoost")
-    with k2: st.metric("Best ROC AUC",  f"{max(m['roc_auc'] for m in MODELS)*100:.2f}%",  delta="Random Forest")
-    with k3: st.metric("Best Accuracy", f"{max(m['accuracy'] for m in MODELS)*100:.2f}%", delta="XGBoost")
-    with k4: st.metric("Best Precision",f"{max(m['precision'] for m in MODELS)*100:.2f}%",delta="XGBoost")
+    with k1: st.metric("Best F1",       f"{max(m['f1'] for m in MODELS)*100:.2f}%",       delta="Transformer")
+    with k2: st.metric("Best ROC AUC",  f"{max(m['roc_auc'] for m in MODELS)*100:.2f}%",  delta="XGBoost")
+    with k3: st.metric("Best Accuracy", f"{max(m['accuracy'] for m in MODELS)*100:.2f}%", delta="Random Forest")
+    with k4: st.metric("Best Precision",f"{max(m['precision'] for m in MODELS)*100:.2f}%",delta="Random Forest")
 
     st.markdown("<br>", unsafe_allow_html=True)
     tab1, tab2, tab3 = st.tabs(["Metrics Table", "Bar Comparison", "Radar Chart"])
