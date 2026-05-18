@@ -179,12 +179,12 @@ def feature_importance():
 def model_metrics():
     return jsonify({
         'models': [
-            {'name': 'Random Forest', 'accuracy': 0.9371, 'precision': 0.7521, 'recall': 0.9074, 'f1': 0.8224, 'roc_auc': 0.9771, 'color': '#3b82f6'},
-            {'name': 'XGBoost',       'accuracy': 0.9579, 'precision': 0.8929, 'recall': 0.8384, 'f1': 0.8648, 'roc_auc': 0.9711, 'color': '#f59e0b'},
-            {'name': 'LSTM',          'accuracy': 0.8291, 'precision': 0.4834, 'recall': 0.6286, 'f1': 0.5465, 'roc_auc': 0.8448, 'color': '#10b981'},
-            {'name': 'Transformer',   'accuracy': 0.7978, 'precision': 0.4221, 'recall': 0.6343, 'f1': 0.5068, 'roc_auc': 0.8081, 'color': '#8b5cf6'},
+            {'name': 'Random Forest', 'accuracy': 0.9498, 'precision': 0.9639, 'recall': 0.7442, 'f1': 0.8399, 'roc_auc': 0.9782, 'color': '#3b82f6'},
+            {'name': 'XGBoost',       'accuracy': 0.9497, 'precision': 0.9468, 'recall': 0.7585, 'f1': 0.8423, 'roc_auc': 0.9809, 'color': '#f59e0b'},
+            {'name': 'LSTM',          'accuracy': 0.9460, 'precision': 0.9025, 'recall': 0.7789, 'f1': 0.8361, 'roc_auc': 0.9762, 'color': '#10b981'},
+            {'name': 'Transformer',   'accuracy': 0.9486, 'precision': 0.8776, 'recall': 0.8249, 'f1': 0.8504, 'roc_auc': 0.9804, 'color': '#8b5cf6'},
         ],
-        'rul': {'mae': 4.3, 'rmse': 6.57, 'r2': 0.6455}
+        'rul': {'mae': 2.955, 'rmse': 6.584, 'r2': 0.3619}
     })
 
 if __name__ == '__main__':
