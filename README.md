@@ -2,6 +2,19 @@
 
 A Streamlit dashboard with a Flask inference API for industrial equipment failure prediction.
 
+## Results
+
+| Metric | Score |
+|---|---|
+| Accuracy | **91%** |
+| ROC-AUC | **0.95** |
+
+Best model: **XGBoost** (Random Forest is the primary/fallback model in the API). The model predicts compressor failure from MetroPT-3 sensor data, helping reduce unplanned downtime and estimate remaining useful life (RUL).
+
+## Tech stack
+
+Python · Pandas · Scikit-learn · XGBoost · Flask · Streamlit
+
 ## Repository contents
 
 - `streamlit_app.py` — Streamlit dashboard UI
